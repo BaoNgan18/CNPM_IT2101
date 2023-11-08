@@ -9,6 +9,9 @@ class Category(db.Model):
     name = Column(String(50), nullable=False, unique=True)
     products = relationship('Product', backref='category', lazy=True)
 
+    def __str__(self):
+        return self.name
+
 class Product(db.Model):
     id = Column(Integer, primary_key=True, autoincrement=True)
     name = Column(String(50), nullable=False, unique=True)
@@ -16,48 +19,42 @@ class Product(db.Model):
     image = Column(String(100))
     category_id = Column(Integer, ForeignKey(Category.id))
 
+    def __str__(self):
+        return self.name
+
 if __name__ == '__main__':
     with app.app_context():
-
+        db.create_all()
         c1 = Category(name='Laptop')
-        # c2 = Category(name='Tablet')
+        c2 = Category(name='Tablet')
 
         db.session.add(c1)
-        # db.session.add(c2)
-        # db.session.commit()
-
-        # p1 = Product(name='iPhone 13', price='20000000', image='https://res.cloudinary.com/dxxwcby8l/image/upload/v1688179242/hclq65mc6so7vdrbp7hz.jpg', category_id=1)
-        # p2 = Product(name='iPhone 11', price='18000000',
-        #              image='https://res.cloudinary.com/dxxwcby8l/image/upload/v1688179242/hclq65mc6so7vdrbp7hz.jpg',
-        #              category_id=2)
-        # p3 = Product(name='Galaxy S22', price='20000000',
-        #              image='https://res.cloudinary.com/dxxwcby8l/image/upload/v1688179242/hclq65mc6so7vdrbp7hz.jpg',
-        #              category_id=1)
-        # p4 = Product(name='iPhone 13 plus', price='20000000',
-        #              image='https://res.cloudinary.com/dxxwcby8l/image/upload/v1688179242/hclq65mc6so7vdrbp7hz.jpg',
-        #              category_id=1)
-        # p5 = Product(name='Galaxy 7', price='20000000',
-        #              image='https://res.cloudinary.com/dxxwcby8l/image/upload/v1688179242/hclq65mc6so7vdrbp7hz.jpg',
-        #              category_id=1)
-        # p6 = Product(name='Samsung 6 plus', price='18000000',
-        #              image='https://res.cloudinary.com/dxxwcby8l/image/upload/v1688179242/hclq65mc6so7vdrbp7hz.jpg',
-        #              category_id=2)
-        # p7 = Product(name='Realme c15', price='20000000',
-        #              image='https://res.cloudinary.com/dxxwcby8l/image/upload/v1688179242/hclq65mc6so7vdrbp7hz.jpg',
-        #              category_id=2)
-        # p8 = Product(name='Redmi 13', price='20000000',
-        #              image='https://res.cloudinary.com/dxxwcby8l/image/upload/v1688179242/hclq65mc6so7vdrbp7hz.jpg',
-        #              category_id=1)
-        #
-        # db.session.add_all([p1, p2, p3, p4, p5, p6, p7, p8])
-        # db.session.add(p1)
-        # db.session.add(p2)
-        # db.session.add(p3)
-        # db.session.add(p4)
-        # db.session.add(p5)
-        # db.session.add(p6)
-        # db.session.add(p7)
-        # db.session.add(p8)
+        db.session.add(c2)
         db.session.commit()
 
-        # db.create_all()
+        p1 = Product(name='iPhone 13', price='20000000', image='https://res.cloudinary.com/dxxwcby8l/image/upload/v1688179242/hclq65mc6so7vdrbp7hz.jpg', category_id=1)
+        p2 = Product(name='iPhone 11', price='18000000',
+                     image='https://res.cloudinary.com/dxxwcby8l/image/upload/v1688179242/hclq65mc6so7vdrbp7hz.jpg',
+                     category_id=2)
+        p3 = Product(name='Galaxy S22', price='20000000',
+                     image='https://res.cloudinary.com/dxxwcby8l/image/upload/v1688179242/hclq65mc6so7vdrbp7hz.jpg',
+                     category_id=1)
+        p4 = Product(name='iPhone 13 plus', price='20000000',
+                     image='https://res.cloudinary.com/dxxwcby8l/image/upload/v1688179242/hclq65mc6so7vdrbp7hz.jpg',
+                     category_id=1)
+        p5 = Product(name='Galaxy 7', price='20000000',
+                     image='https://res.cloudinary.com/dxxwcby8l/image/upload/v1688179242/hclq65mc6so7vdrbp7hz.jpg',
+                     category_id=1)
+        p6 = Product(name='Samsung 6 plus', price='18000000',
+                     image='https://res.cloudinary.com/dxxwcby8l/image/upload/v1688179242/hclq65mc6so7vdrbp7hz.jpg',
+                     category_id=2)
+        p7 = Product(name='Realme c15', price='20000000',
+                     image='https://res.cloudinary.com/dxxwcby8l/image/upload/v1688179242/hclq65mc6so7vdrbp7hz.jpg',
+                     category_id=2)
+        p8 = Product(name='Redmi 13', price='20000000',
+                     image='https://res.cloudinary.com/dxxwcby8l/image/upload/v1688179242/hclq65mc6so7vdrbp7hz.jpg',
+                     category_id=1)
+
+        db.session.add_all([p1, p2, p3, p4, p5, p6, p7, p8])
+        db.session.commit()
+
